@@ -52,6 +52,53 @@ p3 <- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
   
 animate(p3, renderer = gifski_renderer())
 
+## Ejercicios sugeridos incluidos en la referencia: https://r4ds.had.co.nz/data-visualisation.html -----
+
+library(tidyverse)
+
+# Descripción de la base 'mpg' en ggplot
+?mpg
+
+# Primeras diez observaciones de la base de datos
+head(mpg,10)
+
+# Gráfico simple sobre la base de datos
+ggplot(data = mpg) + 
+  geom_point(aes(x = displ, y = hwy),color="steelblue")
+
+
+# Preguntas y ejercicios sobre la base de datos
+## Run 
+ggplot(data = mpg) #What do you see? -> Nada, no se han establecido los parámetros de las capas que darán forma al gráfico
+  
+## How many rows are in mpg? How many columns?
+
+mpg # -> 234 filas y 11 columnas
+  
+## What does the drv variable describe? 
+
+?mpg # -> el tipo de tracción que tiene cada auto, trasera, delantera o en las 4 ruedas
+
+## Make a scatterplot of hwy vs cyl.
+
+ggplot(data = mpg) +
+  geom_point(aes(x=cyl, y=hwy),col="steelblue",size=3)
+
+## What happens if you make a scatterplot of class vs drv? Why is the plot not useful?
+ggplot(data = mpg) +
+  geom_point(aes(x=drv, y=class),col="steelblue",size=3) # -> Sólo es una subcategorización de los datos, no informa sobre el desempeño de estos
+
+# Clasificar los puntos por el tipo de automóvil
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = class),shape=2,size=3)
+
+# Ejemplo de cómo usar una variable para determinar el tamaño de la geometría (no tiene mucho sentido en variables categóricas)
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, size = class))
 
 
 
+
+
+  
+  
